@@ -29,8 +29,12 @@
 <script setup lang="ts">
 import { appWindow, LogicalSize } from '@tauri-apps/api/window'
 import { ref } from 'vue'
-
+import { useDialog } from 'naive-ui'
 const isBig = ref(false)
+const dialog = useDialog()
+
+const isClose = ref<boolean | null>(null)
+
 const minimize = async () => {
   await appWindow.minimize()
 }
@@ -44,7 +48,23 @@ const restore = async () => {
   isBig.value = false
 }
 const close = async () => {
-  await appWindow.hide()
+  if (isClose.value == null) {
+    dialog.warning({
+      title: '关闭',
+      content: '你确定？',
+      positiveText: '确定',
+      negativeText: '不确定',
+      maskClosable: false,
+      onPositiveClick: () => {
+        isClose.value = true
+      },
+      onNegativeClick: () => {
+        isClose.value = false
+      },
+    })
+  } else {
+    await appWindow.hide()
+  }
   // await appWindow.close()
 }
 </script>

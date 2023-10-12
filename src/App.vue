@@ -1,5 +1,9 @@
 <template>
-  <RouterView></RouterView>
+  <NDialogProvider>
+    <RouterView></RouterView>
+  </NDialogProvider>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { NDialogProvider } from 'naive-ui'
+</script>
 <style scoped></style>
