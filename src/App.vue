@@ -1,9 +1,24 @@
 <template>
-  <NDialogProvider>
-    <RouterView></RouterView>
-  </NDialogProvider>
+  <NConfigProvider class="config-provider-container" :theme="theme">
+    <NDialogProvider>
+      <NNotificationProvider>
+        <NMessageProvider>
+          <RouterView></RouterView>
+          <NThemeEditor></NThemeEditor>
+        </NMessageProvider>
+      </NNotificationProvider>
+    </NDialogProvider>
+  </NConfigProvider>
 </template>
 <script setup lang="ts">
-import { NDialogProvider } from 'naive-ui'
+import { NConfigProvider, NDialogProvider, NNotificationProvider, NMessageProvider, NThemeEditor } from "naive-ui";
+import { computed } from "vue";
+const theme = computed(() => {
+  return undefined;
+});
 </script>
-<style scoped></style>
+<style scoped>
+.config-provider-container {
+  height: 100%;
+}
+</style>

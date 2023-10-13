@@ -1,17 +1,15 @@
 <!--  -->
 <template>
-  <div class="page">hello3</div>
+  <div class="page">
+    <n-result status="500" title="500 服务器错误" description="服务器出错可能说明该雇更多程序员了">
+      <template #footer>
+        <n-button>散财消灾</n-button>
+      </template>
+    </n-result>
+  </div>
 </template>
-<script setup lang="ts"></script>
-<script lang="ts">
-export default {
-  name: 'page3',
-}
+<script setup lang="ts">
+import { NResult, NButton } from "naive-ui";
 </script>
-<style scoped>
-.page {
-  width: 100%;
-  height: 100%;
-  background-color: aqua;
-}
-</style>
+
+<style scoped></style>

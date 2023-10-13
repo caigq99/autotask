@@ -1,41 +1,39 @@
 <template>
-  <n-layout class="container-box">
-    <n-layout-header class="header-box">
+  <NLayout class="container-box">
+    <NLayoutHeader class="header-box">
       <TitleBar></TitleBar>
-    </n-layout-header>
-    <n-layout class="sub-container" has-sider>
-      <n-layout-sider class="aside-container">
+    </NLayoutHeader>
+    <NLayout class="sub-container" has-sider>
+      <NLayoutSider class="aside-container">
         <MenuAside @menu-click="menuClick"></MenuAside>
-      </n-layout-sider>
-      <n-layout-content class="content-container">
+      </NLayoutSider>
+      <NLayoutContent class="content-container">
         <RouterView v-slot="{ Component }">
           <KeepAlive> <component :is="Component"></component></KeepAlive>
         </RouterView>
-      </n-layout-content>
-    </n-layout>
-  </n-layout>
+      </NLayoutContent>
+    </NLayout>
+  </NLayout>
 </template>
 <script setup lang="ts">
-import { NLayout, NLayoutHeader, NLayoutSider, NLayoutContent } from 'naive-ui'
-import type { MenuItem } from '../../components/MenuAside/types/index'
-import { useRouter } from 'vue-router'
+import { NLayout, NLayoutHeader, NLayoutSider, NLayoutContent } from "naive-ui";
+import type { MenuItem } from "../../components/MenuAside/types/index";
+import { useRouter } from "vue-router";
 
-import TitleBar from '../../components/TitleBar/index.vue'
-import MenuAside from '../../components/MenuAside/index.vue'
+import TitleBar from "../../components/TitleBar/index.vue";
+import MenuAside from "../../components/MenuAside/index.vue";
 
-const router = useRouter()
+const router = useRouter();
 const menuClick = (data: MenuItem) => {
-  router.push(`/home/page${data.id}`)
-}
+  router.push(`/home/page${data.id}`);
+};
 </script>
 
 <style scoped>
 .container-box {
-  width: 100%;
   height: 100%;
 }
 .sub-container {
-  width: 100%;
   height: calc(100% - 30px);
 }
 

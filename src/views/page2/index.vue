@@ -1,17 +1,15 @@
 <!--  -->
 <template>
-  <div class="page">hello2</div>
+  <div class="page">
+    <n-result status="403" title="403 禁止访问" description="总有些门是对你关闭的">
+      <template #footer>
+        <n-button>放轻松</n-button>
+      </template>
+    </n-result>
+  </div>
 </template>
-<script setup lang="ts"></script>
-<script lang="ts">
-export default {
-  name: 'page2',
-}
+<script setup lang="ts">
+import { NResult, NButton } from "naive-ui";
 </script>
-<style scoped>
-.page {
-  width: 100%;
-  height: 100%;
-  background-color: antiquewhite;
-}
-</style>
+
+<style scoped></style>
