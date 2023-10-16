@@ -38,44 +38,52 @@ impl CustomMenu {
 }
 
 pub fn system_tray_event_handle(app: &AppHandle, event: SystemTrayEvent) {
+    let window = app.get_window("main").unwrap();
     match event {
-        SystemTrayEvent::LeftClick { .. } => match app.get_window("main") {
-            Some(window) => match window.is_visible() {
-                Ok(true) => {
-                    window.hide().expect("hide error");
-                }
-                Ok(false) => {
-                    window
-                        .set_always_on_top(true)
-                        .expect("Failed to set always on top ");
-                    if let Ok(state) = window.is_minimized() {
-                        match state {
-                            true => {
-                                window.unminimize().expect("Failed to unminimize");
-                            }
-                            _ => {}
-                        }
-                    }
-                    window.show().expect("Failed to show window");
-                    window
-                        .set_always_on_top(false)
-                        .expect("Failed to unset always on top");
-                }
-                Err(_) => (),
-            },
-            None => {
-                println!("{}", "not found window");
+        SystemTrayEvent::LeftClick { .. } => match window.is_visible() {
+            Ok(true) => {
+                window.hide().expect("hide error");
             }
+            Ok(false) => {
+                window
+                    .set_always_on_top(true)
+                    .expect("Failed to set always on top ");
+                if let Ok(state) = window.is_minimized() {
+                    match state {
+                        true => {
+                            window.unminimize().expect("Failed to unminimize");
+                        }
+                        _ => {}
+                    }
+                }
+                window.show().expect("Failed to show window");
+                window
+                    .set_always_on_top(false)
+                    .expect("Failed to unset always on top");
+            }
+            Err(_) => (),
         },
         SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
             "show" => {
-                println!("点击了显示主界面")
+                window
+                    .set_always_on_top(true)
+                    .expect("Failed to set always on top ");
+                if let Ok(state) = window.is_minimized() {
+                    match state {
+                        true => {
+                            window.unminimize().expect("Failed to unminimize");
+                        }
+                        _ => {}
+                    }
+                }
+                window.show().expect("Failed to show window");
+                window
+                    .set_always_on_top(false)
+                    .expect("Failed to unset always on top");
             }
-            "hide" => {
-                println!("点击了隐藏")
-            }
+            "hide" => window.hide().expect("hide error"),
             "quit" => {
-                println!("点击了退出")
+                window.close().expect("Failed to close");
             }
             _ => {}
         },
