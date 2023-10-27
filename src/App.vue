@@ -20,5 +20,6 @@ const theme = computed(() => {
 <style scoped>
 .config-provider-container {
   height: 100%;
+  border-radius: 50px;
 }
 </style>
